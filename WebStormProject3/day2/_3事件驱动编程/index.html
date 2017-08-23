@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="index.js"></script>
+</head>
+<body>
+  index 事件驱动编程<br/>
+  <!--事件都是以on开头的-->
+  <!--方式1-->
+  <!--onclick="调用响应函数" 加完的效果是在背景色任何地方都能触发-->
+  <p onclick="alert(123)" style="background-color: green">p标签1</p>
+  <!--不管是alert还是函数 实质都是用window调用 因为在窗口里面-->
+  <p onclick="window.sayHello()" style="background-color: steelblue">p标签2</p>
+  <!--this调用当前对象源-->
+  <p onclick="window.sayHello(this)" style="background-color: gray">p标签3</p>
+
+  <!--方式2 获取元素对象(事件源)调用事件方法-->
+  <div id="div1" style="background-color: yellow">div标签1</div>
+
+
+
+
+
+
+
+</body>
+</html>

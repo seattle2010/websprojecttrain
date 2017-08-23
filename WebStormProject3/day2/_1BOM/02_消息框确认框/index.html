@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="index.js"></script>
+</head>
+<body>
+  index 消息框/对话框<br/>
+  <!--在api中这些方法都在 window对象的文档中-->
+  <!--下面写script没有自动联想  如果想联想可以在jsp里编辑后拷贝过来-->
+<!--查找api alert()方法-->
+  <!--alert() 方法用于显示带有一条指定消息和一个 OK 按钮的警告框-->
+  <a href="javascript:window.alert('你点我呀')">弹出消息框</a><br/>
+
+  <!--prompt(text,defaulttext) 方法用于显示可提示用户进行输入的对话框-->
+  <a href="javascript:window.prompt('你是小狗吗','必须回答 我是小狗')">弹出对话框</a><br/>
+  <!--也可以用取得返回值 在jsp里写promptDialog()方法 -->
+<!--  function promptDialog() {
+  var input = prompt('你是小狗吗','必须回答 我是小狗')
+  p(input)
+  }-->
+  <a href="javascript:promptDialog()">弹出对话框控制器显示</a><br/>
+
+  <!--确定对话框  显示true和false-->
+  <a href="javascript:window.confirm('确定你真是小狗?')">确定对话框</a><br/>
+  <!--如果直接写这个就会直接删除<a href="/employee_delete.action">删除员工</a><br/>-->
+  <!--新建一个delete.html 可以跳转到那  return返回真的时候才跳转-->
+  <a href="delete.html" onclick="return confirm('真的删除?')">删除员工</a><br/>
+
+</body>
+</html>

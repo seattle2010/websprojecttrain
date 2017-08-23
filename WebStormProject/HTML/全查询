@@ -1,0 +1,593 @@
+对控制面板的操作
+show databases;
+use lesson;
+show tables;
+SELECT * FROM product;
+begin;
+commit;
+rollback;
+
+#这是单行注销
+-- ctrl +/
+#简单查询
+#查询所有货品的productname,id,saleprice
+-- SELECT productname,id,saleprice FROM product;
+SELECT * FROM product
+
+#查询商品的分类编号
+-- SELECT dir_id FROM product;
+   #消除重复DISTINCT
+   SELECT DISTINCT dir_id FROM product;
+   #再加上一个信息 只有dir_id和id都符合相等的信息才会被去重复
+   SELECT DISTINCT dir_id,id FROM product;
+
+#最后不加;分号也能运行
+#实现数学运算
+#查询所有货品的id,名称和批发价(批发价=卖家*折扣)
+SELECT id,productname,saleprice*cutoff FROM product;
+
+#查询所有货品的id,名称和各进50个的成本价(成本=costPrice)
+SELECT id,productname,costprice*50 FROM product;
+
+#查询所有货品的id,名称和各进50个,并且每个运费1元(使用别名表述成本查询结果)
+SELECT id,productname,(costprice+1)*50 FROM product;
+SELECT id,productname,(costprice+1)*50 AS 成本 FROM product;# AS pf
+SELECT id,productname,(costprice+1)*50 成本 FROM product;#  pf
+    #使用空格和是关键字的 时候需要加引号
+SELECT id,productname,(costprice+1)*50 "成  本" FROM product;# AS "成  本"
+
+#过滤查询: 当不需要过多数据的时候
+#比较运算符
+需求: 查询货品零售价为119的所有货品信息.
+SELECT * FROM product WHERE saleprice = 119;
+
+需求: 查询货品名为罗技G9X的所有货品信息.
+SELECT * FROM product WHERE productName = '罗技G9X'; #也可以 罗技g9x
+
+需求: 查询货品名 不为 罗技G9X的所有货品信息.
+SELECT * FROM product WHERE productName != '罗技G9X';# G写成g也行 不区分
+
+需求: 查询分类编号不为2的货品信息.
+SELECT * FROM product WHERE dir_id != 2;
+
+需求: 查询货品名称,零售价小于等于200的货品
+SELECT * FROM product WHERE saleprice <= 200;
+
+需求: 查询id，货品名称，批发价大于350的
+SELECT id,productname,saleprice*cutoff FROM product WHERE saleprice*cutoff >350;
+##这是个别名错误的例子 先演示 引出查询顺序
+## SELECT id,productname,pf FROM product WHERE saleprice * cutoff pf > 350;
+SQL中不同子句执行先后顺序: 顺口 从哪里找排序
+1):首先执行FROM子句. 明确从哪一张表中做查询.
+2):其次执行WHERE子句.筛选符合条件的数据.
+3):接着执行SELECT子句.选择出要显示哪些列的数据.
+4):最后执行ORDER BY子句.对查询筛选的结果再做排序.
+#ORDER BY 语句用于对结果集进行排序。
+ASC：升序（默认），DESC：降序。 ORDER BY 语句默认按照升序对记录进行排序。
+#以字母顺序显示
+#以逆字母顺序显示
+SELECT id,productname,saleprice*cutoff FROM product
+WHERE saleprice*cutoff >350 ORDER BY productname;
+
+SELECT id,productname,saleprice*cutoff FROM product
+WHERE saleprice*cutoff >350 ORDER BY productname DESC;
+-----------------------------------------------------------------
+#逻辑运算符:AND(&&) OR(||) NOT(!)
+需求: 选择id，货品名称，零售价在300-400之间的货品        &&符号也行
+SELECT id,productname,saleprice FROM product WHERE saleprice >= 300 AND saleprice <= 400;
+
+需求: 选择id，货品名称，分类编号为2或者4的所有货品
+SELECT * FROM product WHERE dir_id = 2 OR dir_id =4;
+
+需求: 选择id，货品名称，分类编号不为2的所有货品
+SELECT * FROM product WHERE dir_id != 2;
+SELECT * FROM product WHERE NOT dir_id = 2;
+
+需求: 选择id，货品名称，分类编号的货品零售价大于等于250或者是成本大于等于200
+#先运行SELECT id,productname,dir_id,salePrice,costPrice FROM product
+#WHERE salePrice>=250
+#再加上OR salePrice >=200  分析结果 是两个分别查询的拼起来的 所以id12的140不太合理
+SELECT id,productname,dir_id,salePrice,costPrice FROM product
+WHERE salePrice>=250 OR salePrice >=200;
+
+运算符优先级规则:
+所有比较运算符--->NOT-->AND-->OR  用括号括上是最好的方法
+先写出 看看分析执行顺序
+左右都是括号 优先级相同 就从左往右看
+再从外往内看 先执行> 比较运算符 再执行not 再取and两边一起的结果 再和or或
+#LIKE'%M%'是模糊查询
+#翻译 : 产品名称里不带有M的,并且价格在100以上 或者 分类id是2的
+#最后查询结果里 还是有M 原因是他们的分类编号是2
+SELECT id,productname FROM product
+WHERE(NOT productname LIKE'%M%' AND saleprice > 100) OR (dir_id = 2)
+
+#使用BETWEEN AND 运算符显示某一值域范围的记录
+需求: 选择零售价在300-400之间的货品
+SELECT * FROM product WHERE saleprice BETWEEN 300 AND 400;
+之前方法是: 这种方法更灵活 可以分两个查询框              要让注意 这是>=  <=
+SELECT * FROM product WHERE saleprice >=300 AND saleprice <=400;
+
+需求: 选择零售价不在300-400之间的货品  相当于对between and结果取反
+SELECT * FROM product WHERE saleprice NOT BETWEEN 300 AND 400;
+
+#集合查询:
+#使用IN运算符，判断列的值是否在指定的集合中。
+
+需求: 选择分类编号为2或者4的所有货品
+SELECT * FROM product WHERE dir_id IN (2,4);
+原来的写法    在网站上批量删除时候用的多
+SELECT * FROM product WHERE dir_id = 2 OR dir_id = 4
+
+#空值判断:
+#IS NULL:判断列的值是否为空。
+#这个不执行演示 不破坏表结构
+SELECT * FROM product WHERE dir_id IS NULL;
+-----------------------------------------------------------------
+模糊查询
+使用LIKE运算符执行通配查询,查询条件可包含文字字符或数字:
+% 通配符 可以表示零或多个字符;
+_  通配符 可以表示一个字符;
+
+通配符:用来实现匹配部分值 的特殊字符.
+
+需求: 查询id，货品名称，货品名称匹配'%罗技M9_'
+#like可以翻译成约等于  %M 以m结尾的  M%以m开头的
+SELECT * FROM product WHERE productName LIKE '%M%'  #  %的意思是所有的
+SELECT * FROM product WHERE productName LIKE '%罗技M9_' # _是要有一个字符 M9自己是不会被查出
+SELECT * FROM product WHERE productName LIKE '%罗技M9__' # __ 两个的意思是要有两个字符
+名字的时候 查询
+-- name LIKE '张%'      name LIKE '张_'  两个字的时候
+
+需求: 查询零售价大于等于200并且货品名称匹配'罗技M9'
+SELECT * FROM product WHERE saleprice >= 200 AND productName LIKE '%罗技M9%'
+
+需求:选择id，货品名称，分类编号,零售价并且按零售价降序排序
+SELECT id,productname,dir_id,saleprice FROM product ORDER BY salePrice ASC
+SELECT id,productname,dir_id,saleprice FROM product ORDER BY salePrice   #可以不写ASC
+SELECT id,productname,dir_id,saleprice FROM product ORDER BY salePrice DESC
+
+按多列排序:
+需求: 选择先按分类编号排序,若分类编号相等再按零售价降序
+SELECT * FROM product ORDER BY dir_id ASC,saleprice DESC
+#dir_id ASC满足后会自动再执行saleprice DESC
+
+根据列的别名排序:
+需求:查询M系列并按照批发价排序(加上别名)
+先写这个
+SELECT *,salePrice*cutoff FROM product WHERE productname LIKE '%M%'
+ORDER BY salePrice*cutoff
+再写成这个 前后分别加上pf
+SELECT *,salePrice*cutoff pf FROM product WHERE productname LIKE '%M%' ORDER BY pf
+#ORDER BY在查询之后执行 所以pf可以被识别
+
+需求:查询分类为2并按照批发价降序(加上别名)  #和上面一样 就是productname LIKE '%M%'不同
+SELECT *,salePrice*cutoff pf FROM product WHERE dir_id = 2 ORDER BY pf DESC
+#注意 不能对使用了引号的别名进行排序
+SELECT执行顺序
+先执行FROM--->接着执行WHERE--->再执行SELECT--->最后执行ORDER BY
+
+分页设计: 是MYSQL特有的语法
+真分页/物理分页/数据库分页:
+#LIMIT beginIndex,pageSize;    索引是从0开始的 第一页是0,1,2索引
+SELECT * FROM product LIMIT 0,3   #第一页的3个数据
+SELECT * FROM product LIMIT 3,3   #第二页的3个数据
+SELECT * FROM product LIMIT 6,3   #第三页的3个数据
+SELECT * FROM product LIMIT 9,3   #第四页的3个数据
+
+beginIndex = (currentPage-1)*pageSize; #当前页减一
+SELECT * FROM `product` LIMIT (N-1)*3, 3
+
+SELECT * FROM product WHERE productname LIKE '%M%'  #第一步执行看看有多少条 13条
+#如果每页5条 第二页是?
+SELECT * FROM product WHERE productname LIKE '%M%' LIMIT 5,5 #这是第二页 N(2)-1
+#显示9到13的数据
+
+-----------------------------------------------------------------
+什么是聚集函数(又叫做分组函数/统计函数)：
+聚集函数作用于一组数据，并对一组数据返回一个值。
+COUNT (统计结果记录数  )   MAX MIN  SUM  AVG
+需求:查询所有商品平均零售价
+SELECT salePrice FROM product  #结果共有20条
+SELECT SUM(salePrice) FROM product  #结果6762
+SELECT AVG(salePrice) FROM product  #结果338.1
+
+
+需求:查询商品总记录数
+SELECT COUNT(id) FROM product #一般推荐写主键 不能有重复
+SELECT COUNT(*) FROM product  #查询所有的 效果一样
+#以后做分页是用两条SQL语句 第一个COUNT(id),第二个limit
+
+需求:查询分类为2的商品总数
+SELECT COUNT(id) FROM product WHERE dir_id = 2
+
+需求:查询商品的最小零售价，最高零售价，以及所有商品零售价总和
+SELECT MIN(salePrice),MAX(salePrice),SUM(salePrice) FROM product
+
+GROUP BY
+#使用group by分组时，select子句要么是分组的组名、要么是基于组的汇总函数、没有第三种情况
+SELECT dir_id,SUM(salePrice) FROM product #把id合并了 显示了3
+SELECT dir_id,SUM(salePrice) FROM product GROUP BY dir_id #用dir_id分组了
+Having 过滤 对组进行条件过滤
+求售价总和大于3000的dir_id组
+SELECT dir_id,SUM(salePrice) FROM product GROUP BY dir_id  having SUM(salePrice) > 3000
+
+
+
+多表查询
+-----------------------------------------------------------------
+笛卡尔积
+
+注意:没有连接条件的表关系返回的结果:
+多表查询会产生笛卡尔积:
+假设集合A={a,b}，集合B={0,1,2}，则两个集合的笛卡尔积为{(a,0),(a,1),(a,2),(b,0),(b,1),(b,2)}。
+实际运行环境下，应避免使用全笛卡尔集(笛卡尔积的数据存在大量的不合理)。
+
+消除笛卡尔积最简单最直接的方式:
+  使用等值连接.
+如果是N张表做连接查询,等值连接关系至少是N-1个.
+需求:查询所有的货品信息+对应的货品分类信息
+SELECT productName,dirName FROM product,productdir
+WHERE dir_id = productdir.id
+
+需求:查询所有的货品信息+对应的货品分类信息
+SELECT * FROM product,productdir  #看到笛卡尔积的效果 共80条 20乘以4
+SELECT * FROM product,productdir WHERE dir_id = productdir.id #单独写id会产生歧义
+
+SELECT productName,dirName FROM product,productdir WHERE dir_id = productdir.id #直观了
+
+外键约束和多表查询是没有关系的 外键约束在添加的时候起到约束作用
+
+查询所有的货品信息+对应的货品分类信息
+#不限制条件 全部查询 会产生笛卡尔积 80条是20乘以4
+SELECT * FROM product,productdir
+#dir_id列应该是和id1列相当才对        id有两个 所以带上表名
+SELECT * FROM product,productdir WHERE dir_id = productdir.id
+
+外键约束 ppt有
+演示如果乱写数据 没有与表2的id对应 例如 加一行没有dir_id的数据
+SELECT * FROM product,productdir #会产生81条数据 一条没有笛卡尔积
+
+外键的设置    看ppt过程
+在navi里点product表.设计表先改成InnoDB 再外键标签
+也可以用命令的方式改数据库类型  ALTER
+ALTER TABLE product ENGINE = 'InnoDB'
+ALTER TABLE productdir ENGINE = 'InnoDB'
+所有的都做完 如果在product里添加新数据 就发现在dir_id列 只能选下拉菜单固定的
+查看navi里的DDL的product表 SQL语句下面多了一句约束 CONSTRAINT
+讲完这些所有再开始多表查询
+
+#多表查询    尽量把能过滤更多内容的条件放在紧跟where后面
+先展示SQL joins 图
+内连接查询:
+查询货品id，货品名称，货品所属分类名称
+   隐式内连接:
+SELECT productName,dirName FROM product,productdir
+WHERE dir_id = productdir.id
+在where条件里写主从
+
+    显示内连接:
+#区别在于显示在from里写主从  INNER可以省略
+SELECT productName,dirName
+FROM product INNER JOIN productdir ON product.dir_id = productdir.id
+#FROM里的product和productdir的先后顺序无所谓
+
+使用表的别名
+SELECT p.productName,pd.dirName
+FROM product p INNER JOIN productdir pd  #先写这个from 这样可以定义别名
+ON p.dir_id = pd.id
+#INNER可以省略
+SELECT p.productName,pd.dirName
+FROM product p JOIN productdir pd  #先写这个from 这样可以定义别名
+ON p.dir_id = pd.id
+#FROM里的product和productdir的先后顺序无所谓
+-----------------------------------------------------------------
+需求: 查询零售价salePrice大于200的无线鼠标 #(通过名称可以看出数据来源于两个表)
+隐式内连接:
+SELECT * FROM product p,productdir pd
+WHERE p.dir_id = pd.id AND p.salePrice >200 AND pd.dirName ='无线鼠标'
+#p.salePrice >200 AND pd.dirName ='无线鼠标'#也可以
+#写'无线鼠标'而不写dir_id=2的原因是 取内容更直接,京东买东西,取到输入的值
+
+重点 诀窍 where 条件里 尽量把能过滤多的条件写在众多条件的前面
+这个where可以分步写 演示给学生 一层层过滤取值
+用别名的方法
+SELECT * FROM product p,productdir pd
+WHERE p.dir_id = pd.id AND p.salePrice >200 AND pd.dirName ='无线鼠标'
+更简略的:
+SELECT * FROM product,productdir pd
+WHERE dir_id = pd.id AND salePrice >200 AND dirName ='无线鼠标'
+-----------------------------------------------------------------
+显示内连接:
+SELECT * FROM product p JOIN productdir pd ON p.dir_id = pd.id
+WHERE p.salePrice >200 AND pd.dirName ='无线鼠标'
+
+需求: 查询每个货品对应的分类以及对应的库存
+
+#打开库存表  解释库存表
+
+外键约束和多表查询是没有关系的 外键约束在添加的时候起到约束作用
+先消除笛卡尔积
+下面这个查询写完后 查询一下 分析一下几个表结合  这个查询例子最经典
+#产生一个id1和id2  17条记录说明库存里只有17个种类 没有20个
+SELECT * FROM product p,productdir pd,productstock ps
+WHERE p.dir_id = pd.id AND p.id = ps.product_id
+
+开始正式查询 在上面基础上改  #结果是17条
+SELECT p.productName,pd.dirName,ps.storeNum FROM product p,productdir pd,productstock ps
+WHERE p.dir_id = pd.id AND p.id = ps.product_id
+显示内连接
+分析join的秘诀 第一个join on写完 选择前面所有的看 就是两个表组合后 再和后面join ON
+on后面的p.dir_id = pd.id和p.id = ps.product_id都来自上面的隐式 所以最好先写出隐式
+
+SELECT p.productName,pd.dirName,ps.storeNum
+FROM product p JOIN productdir pd ON p.dir_id = pd.id
+#从这往上看 就是两个表结合后 再和下面的表结合
+JOIN productstock ps ON p.id = ps.product_id
+#没有where条件   17条最后
+
+
+需求: 如果库存货品都销售完成,按照利润从高到低查询货品名称,零售价,货品分类（三张表）.
+#下面这三行都是先从上面拷贝过来 构成一个基本结构
+SELECT *
+FROM product p,productdir pd,productstock ps
+WHERE p.dir_id = pd.id AND p.id = ps.product_id
+#接着往下分析
+#  *号只能放在前面   #完成版
+SELECT *,(p.salePrice-p.costPrice)*ps.storeNum lirun
+FROM product p,productdir pd,productstock ps
+WHERE p.dir_id = pd.id AND p.id = ps.product_id
+ORDER BY lirun DESC
+
+#显示的方法
+下面的三行都能从上面找到 并且拷贝过来   #17条
+SELECT *,(p.salePrice-p.costPrice)*ps.storeNum lirun
+FROM product p JOIN productdir pd ON p.dir_id = pd.id
+JOIN productstock ps ON p.id = ps.product_id
+ORDER BY lirun DESC
+-----------------------------------------------------------------
+为什么要用外连接
+这是上面的例子
+查询所有商品的名称和分类名称
+SELECT * FROM product,productdir
+WHERE dir_id=productdir.id
+在product表里增加一行数据 不写dir_id  结果是查不出这个数据
+因为dir_id可以为空 说明不能把product表里的所有东西查出来
+
+在SQL join图的最上面左右两个图
+
+外连接查询:
+   A LEFT JOIN  B----> B RINGHT JOIN A
+  左外连接:查询出JOIN左边表的全部数据查询出来,JOIN右边的表不匹配的数据使用NULL来填充数据.
+  右外连接:查询出JOIN右边表的全部数据查询出来,JOIN左边的表不匹配的数据使用NULL来填充数据.
+语法格式
+SELECT	<selectList>
+FROM	A LEFT/RIGHT OUTER JOIN B
+  ON (A.column_name = B.column_name)];
+左连接:
+SELECT * FROM product p LEFT JOIN productdir pd ON p.dir_id = pd.id
+右连接:
+SELECT * FROM productdir pd RIGHT JOIN product p ON p.dir_id = pd.id
+
+需求  查询所有商品的名称和分类名称
+
+
+查询每种商品分类的名称和包含的的商品总数：
+下面两个是效果一样的
+A LEFT JOIN B
+B RIGHT JOIN A
+左外连
+SELECT * FROM product p LEFT JOIN productdir pd ON p.dir_id = pd.id
+右外连
+SELECT * FROM productdir pd RIGHT JOIN product p ON p.dir_id = pd.id
+
+全连接:看joins图解释  MYSQL不直接支持全连接
+FULL JOIN = LEFT JOIN + RIGHT JOIN
+#////select * from nation full join tank on nation.id=tank.nid;
+
+子查询:查询里面还有查询
+在使用select语句查询数据时,有时候会遇到这样的情况，在where查询条件中的限制条件不是一个确定的值，而是一个来自于另一个查询的结果。
+SELECT 	select_list
+FROM table
+WHERE	 expr  operator
+(SELECT 	select_list
+FROM	 table);
+
+1、子查询在主查询前执行一次
+2、主查询使用子查询的结果
+SELECT AVG(salePrice) FROM product
+查找售价大于平均售价的商品
+SELECT * FROM product WHERE salePrice >(SELECT AVG(salePrice) FROM product)
+
+子查询2
+UNION 一般用作中间表 用来再进行查询
+看右下角查询结果数 UNION 20 UNION ALL 40
+SELECT id,productname,dir_id,saleprice FROM product
+UNION
+SELECT id,productname,dir_id,saleprice FROM product
+
+SELECT id,productname,dir_id,saleprice FROM product
+UNION ALL
+SELECT id,productname,dir_id,saleprice FROM product
+
+SELECT * FROM
+(SELECT id,productname,dir_id,saleprice FROM product
+UNION
+SELECT id,productname,dir_id,saleprice FROM product)t
+
+在MYSQL 中用UNION实现FULL JOIN
+select *
+from product p left join productdir pd on p.dir_id = pd.id
+UNION
+select *
+from product p left join productdir pd on p.dir_id = pd.id
+
+
+
+-----------------------------------------------------------------
+自连接查询:把一张表看成两张来做查询.
+只看鼠标分类表自己
+SELECT * FROM productdir
+
+需求 查询每个商品分类的名称和父分类的名称
+SELECT child.id,child.dirName,parent.dirName
+FROM productdir child JOIN productdir parent
+ON child.parent_id = parent.id
+
+想把"鼠标"显示出来 可以左连接  上面的区别就是多了一个 LEFT  多了一个总的鼠标显示
+SELECT child.id,child.dirName,parent.dirName
+FROM productdir child LEFT JOIN productdir parent
+ON child.parent_id = parent.id
+结束
+//////////
+查询父(顶级)分类"鼠标"
+对鼠标分类表   鼠标这个父类后面内容是空
+SELECT * FROM productdir pd WHERE pd.parent_id IS NULL  (不能写=)
+
+SELECT * FROM productdir pd WHERE pd.parent_id IS NOT NULL
+为下个环节参照用 查询一下 来回切换
+SELECT * FROM productdir2
+
+
+操作数据DML
+-----------------------------------------------------------------
+操作数据DML
+DQL:查询语句,查询之后,会返回结果的临时表.
+DML:增删改语句,操作之后,会返回一个结果,表示受影响的行数(删除3条数据,就返回3).
+------------------------------------------------------------------------------------------
+插入语句:一次插入操作只插入一行.
+INSERT INTO 	table_name (column1,column2,column3...)
+VALUES 	(value1,value2,value3...);
+-------------------------------------------
+1.插入完整数据记录
+2.插入数据记录一部分
+3.插入多条数据记录（MySQL特有）
+ INSERT INTO	table_name (column1,column2,column3...)
+   VALUES (value1,value2,value3...),
+          (value1,value2,value3...),
+          (value1,value2,value3...)..;
+4.插入查询结果
+ INSERT INTO	table_name (column1,column2,column3...)
+     SELECT (column1,column2,column3...)
+     FROM table_name
+ INSERT INTO productdir (dirName,parent_id)
+   SELECT dirName,parent_id FROM productdir
+-----------------------------------------------------------------
+对鼠标类型表进行操作
+1 插入完整数据记录
+下面这个错误 不能添加重复key的值
+INSERT INTO	productdir2 VALUES(1,'雷蛇鼠标',1)
+这个可以
+INSERT INTO	productdir2 VALUES(5,'雷蛇鼠标',1)
+
+下面这个会自动加id序号  因为不能为空 执行一次 就加一个数据 自动累加
+INSERT INTO	productdir2 VALUES(NULL,'雷鼠标',3)
+
+INSERT INTO	productdir2 (id,dirName,parent_id)VALUES(15,'小鼠标',1)
+INSERT INTO	productdir2 (id,dirName,parent_id)VALUES(NULL,'大鼠标',1)
+最推荐下面的写法
+INSERT INTO	productdir2 (dirName,parent_id)VALUES('蝰蛇鼠标',1)
+-----------------------------------------------------------------
+2.插入数据记录一部分
+INSERT INTO	productdir2 (dirName)VALUES('金环蛇鼠标')
+
+插入空值
+''这种空表示有值 是空字符串 'NULL'是表示没有值 判断这个用 IS NULL
+INSERT INTO	productdir2 (dirName)VALUES('')
+INSERT INTO	productdir2 (dirName)VALUES('NULL')
+
+3 一次插入多条数据记录(MySQL特有的) 不建议这么做 不适合以后移植
+INSERT INTO	productdir2 (dirName,parent_id)VALUES('蝰蛇鼠标',1),('蝰蛇鼠标2',1),('蝰蛇鼠标3',1)
+
+4 插入查询结果
+先写select 也就是查询结果是插入的元素
+可以先把 查询语句验证一下  查询两列值 就插入两列
+SELECT dirName,parent_id FROM productdir2
+
+INSERT INTO	productdir2 (dirName,parent_id)
+SELECT dirName,parent_id FROM productdir2
+-----------------------------------------------------------------
+删除操作:
+DELETE  FROM 	table_name [WHERE 	condition];
+注意:如果省略了where子句，则全表的数据都会被删除.
+INSERT INTO	productdir2 (dirName,parent_id)VALUES('蝰蛇鼠标',1),('蝰蛇鼠标',1),('蝰蛇鼠标',1)
+DELETE FROM productdir2 WHERE dirName = '蝰蛇鼠标'
+
+'蝰蛇鼠标%' '蝰蛇鼠标_'     这些都不好用
+DELETE FROM productdir2 WHERE dirName = '蝰蛇鼠标%'
+INSERT INTO	productdir2 (dirName,parent_id)VALUES('蝰蛇鼠标',1),('蝰蛇鼠标',1),('蝰蛇鼠标',1)
+DELETE FROM productdir2 WHERE id > 10 OR dirName = '蝰蛇鼠标'
+-----------------------------------------------------------------
+更新操作:UPDATE 不支持显示连接 LEFT JOIN这些 要是用只能用隐式连接
+UPDATE 	table_name SET	 columnName = value [, columnName = value] [WHERE	condition];
+如果省略了where子句，则全表的数据都会被修改。注意:没有FROM
+
+INSERT INTO	productdir2 (dirName,parent_id)VALUES('蝰蛇鼠标',1),('蝰蛇鼠标',1),('蝰蛇鼠标',1)
+UPDATE productdir2 SET dirName = '键盘',parent_id = NULL WHERE id >=35
+
+需求:将零售价大于300的货品零售价上调0.2倍
+看看有几条数据符合
+SELECT * FROM product2 p WHERE p.salePrice >=300
+搜索条件where后的可以拷贝上面
+UPDATE product2 p SET salePrice = salePrice*1.2 WHERE p.salePrice >=300
+看到受影响的是8条数据 和上面一样  值变了  再用最上面那个查询一下结果
+SELECT * FROM product2 p WHERE p.salePrice >=300
+
+需求:将零售价大于300的有线鼠标的货品零售价上调0.1倍
+拷贝上面的第一个搜索全部语句
+涉及两个表
+SELECT * FROM product2 p,productdir2 pd
+WHERE p.dir_id = pd.id AND p.salePrice >=300 AND pd.dirName = '有线鼠标'
+
+UPDATE product2 p,productdir2 pd
+SET p.salePrice = p.salePrice*1.1
+#下面条件直接拷贝上面的
+WHERE p.dir_id = pd.id AND p.salePrice >=300 AND pd.dirName = '有线鼠标'
+#执行后再次运行上面的查询 看看修改结果
+
+#//// UPDATE employees SET salary=(SELECT salary FROM employees WHERE employees_id=1)
+#////  WHERE employees_id=2
+mysql不支持从自己表中查询的结果再插入到自己的表中 如果结果是从其他表中取出 可以插入
+
+索引
+
+视图
+CREATE OR REPLACE VIEW id_view
+AS SELECT id,salePrice,dir_id
+FROM product
+WHERE salePrice>200
+运行后  在左边视图里就有一个新的视图
+
+drop view id_view
+
+等效果于
+SELECT *
+FROM(SELECT id,salePrice,dir_id FROM product WHERE salePrice>200)t
+
+
+数据备份
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

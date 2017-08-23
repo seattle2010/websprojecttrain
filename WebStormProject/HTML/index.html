@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:height="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--引入css 和 js-->
+    <style type="text/css"></style>
+    <script type="text/javascript"></script>
+</head>
+<body>
+<!--基本标签-->
+<!--eclipse里window下定制视图 最后一项 有快捷的图标设置 从工程里出-->
+<!--"red"单引号也行     font定义文本的字体 大小 颜色-->
+世界那么<b>大</b>,我们去看看<br/>
+<font color="red" size="20" id="d1"> 世界那么</font><b>大</b>,我们去看看<br/>
+<font color="red" size="20" id="d2"> 世界那么</font><b>大</b>,我们去看看<br/>
+<!--转义符  less than小于 &lt 把<html>转成输出-->
+html的第一个标签:&lt; html &gt;  &reg;   &copy;<br/>
+<!--空格 &nbsp;-->
+你好 先生       你好&nbsp;先生
+<!--排版标签-->
+<h1>这是个标题</h1>
+<h2>这是个标题</h2>
+<h3>这是个标题</h3>
+<p>定义一个段落1 文字多的时候效果明显 两个段落间有空行</p>
+<p style="background-color:red">定义一个段落2</p>
+<!--做布局用的div 类似一个容器-->
+<div>div1</div>
+<div style="background-color: coral;height:300px;width:200px" >div2</div>
+<!--span表示一个块 内容有多少  他就有多大-->
+<span>span1</span>  <span style="background-color: coral">span2</span> <span>span3</span>
+<center>里面的元素居中排列<h3>正题</h3></center>
+<pre>
+     里面怎么写的 就怎么显示
+</pre>
+<!--文本标签-->
+<b>你</b><del>不</del><u>可能</u>打<i>我</i><br/>
+2<sup>2</sup>=4 <br/>
+<!--超链接和锚点             在空白页打开新的-->
+<a href="hello.html" target="_blank">点我</a>
+<!--自己跳自己 #-->
+<a href="#" target="_blank">点我2</a>
+
+<a href="#ch1" target="_blank">跳转到第一章</a>
+<a href="#ch2" target="_blank">跳转到第二章</a>
+<!--height: 800px 设置到800-->
+<a name="ch1"><div style="background-color:yellow;height: 50px">第一章节</div></a>
+<a name="ch2"><div style="background-color:green;height: 50px">第二章节</div></a>
+<!--列表标签 ol order list-->
+<ol>
+<!--<ol type="A">  <ol type="A" start="100">-->
+    <li>西施</li>
+    <li>王昭君</li>
+    <li>貂蝉</li>
+    <li>玉环</li>
+</ol>
+<!--无序列表 ul-->
+<ul type="square">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+</ul>
+<!--自定义列表-->
+<dl>
+    <dt>四大美女</dt>
+    <dd>1</dd>
+    <dd>2</dd>
+</dl>
+<!--表格标签  属性一个个的加-->
+<table border="1" width="80%" cellpadding="10" cellspacing="200">
+<table border="1" width="80%" cellpadding="0" cellspacing="0">
+    <caption>学生列表</caption>
+    <tr style="background-color: gray">
+        <td>编号</td>   <!--<th>编号</th>-->
+        <td>年龄</td>
+        <td>性别</td>
+    </tr>
+    <tr>
+        <td>bb</td>
+        <td>bb</td>
+        <td>bb</td>
+    </tr>
+    <tr align="center">
+        <td colspan="4">  <!--colspan合并表格里的行 4是合并4行-->
+<a href="#">首页</a><a href="#">上页</a><a href="#">下页</a><a href="#">末页</a>
+            一共53条数据 当前是第3页
+        </td>
+    </tr>
+</table>
+
+    <!--表单标签-->
+    <!--form:表单域 可以包含多个input元素(输入框/下拉列表/单选框/复选框)-->
+<!--属性 action:把表单里的数据提交给哪个资源处理 action="https://baidu.com"
+    method:表单的提交方式: get缺省,post
+    enctype:表示表单的编码规范 文件上传时候用二进制编码 其他情况不变
+
+
+    -->
+    <h3>用户注册</h3>
+    <form action="#" method="get" enctype="application/x-www-form-urlencoded">
+        <!--type写完后 Alt/ 可以显示出10个可以输入的类型-->
+        <!--必须要有 name=""           还可以再加 disabled 变灰-->
+账号:<input type="text" name="username" value="默认值" maxlength="10" readonly><br>
+        <!--一个一个写 写完账号可以 写下面按钮提交 再写密码-->
+密码:<input type="password" name="password" maxlength="10"><br>
+        性别:
+        <input type="radio" name="gender" value="boy" checked>男
+        <input type="radio" name="gender" value="girl">女
+        <input type="radio" name="gender" value="none">保密<br>
+
+        <input type="checkbox" name="hobby" checked>Java
+        <input type="checkbox" name="hobby">钱
+        <input type="checkbox" name="hobby">女 <br>
+
+头像:<input type="file" name="headImg"> <br>
+
+隐藏 用来后台提交: <input type="hidden" name="id" value="12345"> <br>
+引入图片 图片版按钮: <input type="image" name="img" src="images/nextpage.png"> <br>
+        <!--下拉列表 select-->
+        <select name="city">
+        <!--<select name="city" multiple size="4">--><!--可以多选-->
+            <option >大连</option>
+            <option value="b">大连</option>
+            <option value="c">大连</option>
+        </select> <br>
+
+         <!--cols="30" rows="10"可以写的行列数 ></textarea>必须在同一行-->
+  简介: <textarea name="intro" id="5" cols="30" rows="10">请输入</textarea>
+        <hr>
+        <!--提交按钮  输入值后可以看到地址上有提交 是get方式-->
+        <input type="submit" value="真要注册">
+        <input type="reset" value="重置">
+        <input type="button" value="普通按钮" onclick="alert('你真傻')">
+    </form>
+
+
+
+</body>
+</html>

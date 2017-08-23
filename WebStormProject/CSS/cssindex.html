@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--2  也可以在head里定义整个的样式  就近原则-->
+    <style type="text/css">
+        /* 标签选择器   css代码*/
+        div{
+            background-color: darkcyan;
+        }
+        p{ background-color: cornflowerblue;
+            font-size: 30px;
+            color: coral;
+        }
+        /* 类别选择器  同一个名词类型都通用 前面带个点*/
+        .div4{
+            background-color: fuchsia;
+        }
+        /* id选择器   点对点用*/
+        #div5{background-color: forestgreen}
+    </style>
+
+    /* 也可以单独建立一个后缀.css的文件  定义全局  把上面标签选择里的拷贝过去*/
+    /* 定义连接   link tab自动生成  可以多引用*/
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="indexXXX.css">
+
+</head>
+<body>
+<!--可以在这里单独定义每一个style  这就是css-->
+<div style="background-color: chocolate">DIV1</div>
+<div style="background-color: crimson">DIV2</div>
+<div style="background-color: darkslateblue">DIV3</div>
+<div>DIV4</div>
+<p>P1</p>
+<p>P2</p>
+/* 类别选择器用/
+<div class="div4">DIV4</div>
+<p class="div4">P4</p>
+/* id选择器用*/
+<div id="div5">DIV5</div>
+
+</body>
+</html>

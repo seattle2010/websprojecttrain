@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="index.js"></script>
+</head>
+<body>
+index 插入追加删除替换节点<br/>
+<span id="sp" style="background-color: gray">我是span</span>
+<div id="div1" style="background-color: orange">DIV1</div>
+<div id="div2" style="background-color: yellow">DIV2</div>
+
+<!--可以运行 效果不明显<a href="javascript:appendDIV1()">把span追加到DIV1中</a>-->
+<!--可以运行 效果不明显<a href="">把span追加到DIV2中</a>-->
+
+<!--给父节点追加现有的节点 把span追加到DIV1中-->
+<button onclick="appendDIV1()">把span追加到DIV1中</button>
+<button onclick="appendDIV2()">把span追加到DIV2中</button>
+
+<!--第二次演示给父节点追加新的节点  拷贝上面的 改-->
+<button onclick="insertDIV1()">创建新的span追加到DIV1中</button>
+<!--删除节点-->
+<button onclick="deleteItem()">删除</button>
+<button onclick="replaceItem()">简单替换</button>
+<button onclick="replaceItem1()">用方法替换</button>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
