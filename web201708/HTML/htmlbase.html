@@ -56,8 +56,18 @@
 </dl>
 
 <h3>表格标签</h3>
-<table border="1" width="300">
-    <tr>
+<table border="1" width="300" cellpadding="0" cellspacing="0">
+    <option>学生信息</option>
+    <!--<thead></thead>-->
+    <!--<tbody></tbody>-->
+    <!--<tfoot></tfoot>-->
+    <tr style="background-color: gray">
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+        <th>4</th>
+    </tr>
+    <tr style="background-color: yellow">
         <td>1</td>
         <td>2</td>
         <td>3</td>
@@ -69,14 +79,49 @@
         <td>3</td>
         <td>4</td>
     </tr>
-    <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
+    <tr align="center">
+        <td colspan="4">
+            <a href="#" class="href">首页</a>
+            <a href="#" class="href">上页</a>
+            <a href="#" class="href">下页</a>
+            <a href="#" class="href">末页</a>
+        </td>
     </tr>
-
 </table>
+
+<h3>表单元素</h3>
+<form action="#" method="get">
+    账号:<input type="text" name="username" value="默认值" readonly="readonly" disabled="disabled"> <br>
+    密码:<input type="password" name="password" id="password" > <br>
+    性别:
+    <input type="radio" name="gender" id="gender" value="boy" checked>男 <br>
+    <input type="radio" name="gender" value="girl">女 <br>
+    爱好:
+    <input type="checkbox" name="hobby" id="hobby1" checked>java <br>
+    <input type="checkbox" name="hobby" id="hobby2" >php <br>
+    <input type="checkbox" name="hobby" id="hobby3" >C <br>
+    头像:
+    <input type="file" name="headImg" id="1"><br>
+    城市:
+    <!--multiple可以多选 size同时可以显示的数量-->
+    <select name="city" id="city" multiple="multiple" size="3">
+        <option value="dl">大连</option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+    </select> <br>
+
+    简介:
+    <textarea name="intro" id="intro" cols="200" rows="100"></textarea> <br>
+    <input type="button" value="普通按钮"><br>
+    <input type="reset" value="重置按钮"> <br>
+    <input type="submit" value="提交按钮"> <br>
+
+    <input type="hidden" name="password" value="1234"> <br>
+    <input type="image" src="" alt="">图片的提交按钮
+</form>
+
+
 </body>
 
 </html>
