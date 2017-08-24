@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style1.css">
+    <style>
+#divId1 {
+    background-color: red;
+}
+        .divCls1 {
+            background-color: gray;
+        }
+        span {
+            background-color: pink;
+        }
+
+        span[self="val"] {
+            background-color: deeppink;
+        }
+
+        #divId3 {
+            background-color: palevioletred;
+            width: 80%;
+        }
+
+        .divCls2 {
+            background-color: beige;
+        }
+    </style>
+
+
+</head>
+<body>
+<font size="3">闭月羞花</font>
+<span style="font-size: 1cm">闭月羞花</span>
+
+<!--和html元素的整合★-->
+<!--方式1:内联样式表 通过标签的style属性设置样式-->
+<!--方式2:内部样式表 在当前页面中使用的样式-->
+<!--通过head标签的style子标签导入-->
+<!--例如:-->
+<!--<style>-->
+    <!--#divId2{-->
+        <!--background-color: #0f0;-->
+    <!--}-->
+<!--</style>-->
+
+<!--方式3:外部样式表 有独立的css文件-->
+<!--通过head标签的link子标签导入-->
+<!--例如:-->
+<!--<link rel="stylesheet" href="css/1.css" type="text/css"/>-->
+
+css 样式表分类
+1，内联样式
+
+内联样式是直接在html标签上定义该标签的css样式，如：
+<div style="width:200px;height:30px;"></div>
+2，内部样式
+
+内部样式是写在html文件中，且包含在<style></style>代码块中，如：
+<style>
+    .box{width:200px;height:30px;}
+</style>
+<div class="box"></div>
+
+3，外部样式
+外部样式是通过在html中引用外部css文件来控制样式，如：
+
+html文件中写入引用语句：
+<link href="css文件路径" rel="stylesheet" media="screen" />
+
+
+方式1
+<div style="background-color: indianred">内连模式</div>
+方式2 写在head里面
+<div id="divId1">沉鱼落雁</div>
+方式3  写在单独css文件中
+<div id="divid2">闭月羞花</div>
+
+id选择器
+要求:
+html元素必须有id属性且有值   <xxx id="id1"></xxx>
+css中通过"#"引入,后面加上id的值  #id1{...}
+class选择器
+要求:
+html元素必须有class属性且有值 <xxx class="cls1"/>
+css中通过"."引入,后面加上class的值  .cls1{...}
+元素选择器
+直接用元素(标签)名即可   xxx{...}
+
+类选择器
+<div class="divCls1">沉鱼落雁</div>
+元素选择器
+<span>沉鱼落雁</span>
+<span>闭月羞花</span>
+<span>四大名著</span>
+属性选择器  是元素的一个特殊 叫做派生选择器
+<span self="val">属性选择器</span>
+
+选择器使用小结:
+id选择器:一个元素(标签)
+class选择器:一类元素
+元素选择器:一种元素
+属性选择器:元素选择器的特殊用法
+使用的时候注意:(了解)
+若多个样式作用于一个元素的时候
+不同的样式,会叠加
+相同的样式,最近原则
+若多个选择器作用于一个元素的时候
+越特殊优先级越高 id优先级最高
+
+多个样式作用于一个元素
+<div id="divId3">闭月羞花-作用于一个</div>
+
+多个样式作用于一个元素
+   上面已经有一个span的元素被定义
+   这里再弄一个class作用于
+<span class="divCls2">span作用</span>
+</body>
+</html>
+

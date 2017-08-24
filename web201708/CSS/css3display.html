@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    display:设置是否及如何显示元素。
+    none 此元素不会被显示。
+    block 此元素将显示为块级元素，此元素前后会带有换行符。
+    inline 默认。此元素会被显示为内联元素，元素前后没有换行符。
+
+    <style>
+        div {
+            background-color: pink;
+            height: 50px;
+            width: 50px;
+            border: 1px solid red;
+        }
+        #div2 {
+            display: none;
+        }
+
+        #span2 {
+            display: block;
+
+        }
+        ul {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+
+<div>div1</div>
+<div id="div2">div2</div>
+<div>div3</div>
+<div>div4</div>
+
+<span>span1</span>
+<span id="span2">span2</span>
+<span>span3</span>
+<span>span4</span>
+
+<ol>
+    <ul>1</ul>
+    <ul>2</ul>
+    <ul>3</ul>
+    <ul>4</ul>
+</ol>
+</body>
+</html>
