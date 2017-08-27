@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--DOM操作:-->
+    <!--1.给父节点追加现有/新子节点-->
+    <!--2.在指定节点之前/之后插入新节点-->
+    <!--3.删除节点/替换节点-->
+
+</head>
+<body>
+<span id="sp1" style="background-color: peachpuff">span</span>
+<div id="div1" style="background-color: palevioletred">div1</div>
+<div id="div2" style="background-color: hotpink">div2</div>
+
+<input type="button" value="把span增加给div1" id="input1" onclick="appendDIV1()">
+<input type="button" value="在div2里增加新的span" id="input2" onclick="appendDIV2()">
+
+<select name="sel" id="sel1" multiple="multiple" size="5">
+    <option id="item1">item1</option>
+    <option id="item2">item2</option>
+    <option id="item3">item3</option>
+    <option id="item5">item5</option>
+</select>
+<input type="button" value="在item5前面插入4" onclick="insertOption()">
+<input type="button" value="删除item5" onclick="deleteOption()">
+<input type="button" value="替换item5为item4" onclick="replaceOption()">
+
+
+
+
+
+
+</body>
+<script src="index.js"></script>
+</html>
