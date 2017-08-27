@@ -3,28 +3,31 @@ function User() {
 
 }
 // //创建对象
-// var u = new User();
-// console.debug(u);
-// //给user对象设置属性
-// u.name = "tom";
-// u.age =17;
-// //给user对象设置方法
-//     function sayHello() {
-//     console.debug(this.name, this.age);
-//
-// }
-// u.say = sayHello;
-//
-//     console.debug(u);
-// console.debug(u.age);
-// console.debug(u.name);
-// u.say();
+var u = new User();
+console.debug(u);
+//给user对象设置属性
+u.name = "tom";
+u.age =17;
+//给user对象设置方法
+   u.sayHello = function () {
+    console.debug(this.name, this.age);
+
+}
+    console.debug(u);
+console.debug(u.age);
+console.debug(u.name);
+console.log("======");
+u.sayHello();
 
 function Person(name,age) {
+    // console.log(name, age);//不用this时候 用这个也可以的
 this.name= name;
 this.age = age;
     this.study = function () {
         console.debug(name + "," + age);
+
+        //也可以写个return XXX；
+        //外面可以用console.log(person.study());//打印这个方法的返回值 区别 person。study()调用方法
     }
 }
 var person = new Person("tom",19);
