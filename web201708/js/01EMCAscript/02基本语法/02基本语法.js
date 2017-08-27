@@ -28,3 +28,26 @@ console.debug("A" && "B")
 console.debug(1 && 2 && 3)
 console.debug(1 && null && 3)
 console.debug("" && null && 0)
+
+
+// 数据类型  undefined
+var box1;
+console.log(box1);
+console.log(typeof box1);
+
+var box2 = null;
+console.log(box2);
+
+var box3 = 12;
+console.log(box3);
+console.log(typeof box3);
+
+var box4 = true;
+console.log(typeof box4);
+
+var box5 = "tom";
+console.log(typeof box5);
+
+var box6 = {};
+console.log(typeof box6);
+
