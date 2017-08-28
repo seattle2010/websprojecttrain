@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<input type="url" name="url" id="url"> <br>
+<input type="time" name="time" id="time"> <br>
+<input type="text" name="pattern" id="pattern" placeholder="输入邮政编码" pattern="^[1-9]">
+
+<!--外部提交表单  用form的id对接-->
+<form action="#" id="iform"></form>
+<input type="text" name="text1" id="1" form="iform">
+<input type="submit" value="xx" form="iform">
+<label for="range"></label>range属性: <input type="range" name="range" id="range" max="100" min="10" step="5"> <span>一条滑动效果</span>
+</body>
+</html>
