@@ -10,6 +10,23 @@
         var x = 3;
         changeValue(x);
         alert(x);
+
+
+        var msg = "全局变量";
+        function show() {
+            msg = "局部变量";
+        }
+        show();
+        console.log(msg);  //局部变量
+
+
+        var msg = "全局变量";
+        function show() {
+            var msg;
+            msg = "局部变量";
+        }
+        show();
+        console.log(msg);  //全局变量
     </script>
 </head>
 <body>
