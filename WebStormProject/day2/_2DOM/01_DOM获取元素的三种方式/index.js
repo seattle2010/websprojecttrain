@@ -22,6 +22,7 @@ p(inputEles)
 // getElementsByTagName() 返回带有指定标签名的对象集合。
     //查看所有div
     var divEles = document.getElementsByTagName("div")
+    // var divEles = document.getElementsByTagName("div")[0]
     p(divEles)
     //得到结果 HTMLCollection [ <div#div1>, <div#div2>, <div#div3> ]
 
