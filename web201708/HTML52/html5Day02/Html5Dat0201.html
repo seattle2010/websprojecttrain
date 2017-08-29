@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Html5Dat0201</title>
+</head>
+<body>
+
+<!--novalidate 属性 :提交表单 时不应该验证 form 或 input 域-->
+<form action="">
+    <label for="username">用户名：</label>
+    <input type="text" id="username" pattern="^(\d{3})$" onblur="checkUserName()" required>
+    <span id="userMsg"></span>
+    <br>
+    <label for="id">ID：</label>
+    <input type="text" id="id" required>
+
+    <br>
+    <input type="submit" value="提交">
+</form>
+
+<!--练习：验证 密码和确认密码的一致性-->
+<form>
+    <input type="text" id="password1" placeholder="请输入密码"><br>
+    <input type="text" id="password2" placeholder="请输入确认密码" onblur="checkPas()">
+
+    <input type="submit" value="提交">
+</form>
+
+<button onclick="butTest()">测试</button>
+
+<script type="text/javascript" src="test.js"></script>
+<script type="text/javascript" src="Html5Dat0201.js"></script>
+</body>
+</html>

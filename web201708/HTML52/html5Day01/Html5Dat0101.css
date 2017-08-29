@@ -1,0 +1,31 @@
+#bg{
+    float: right;
+    border: 1px solid black;
+    width: 200px;
+    height:50px;
+    background-color: green;
+}
+
+/*range练习2：通过滑动条模拟RGB颜色*/
+/*GRB 滚动条*/
+#ranColor{
+    /*border: 1px solid red;*/
+    float: left;
+    width:180px;
+    height: auto;
+    margin-right: 10px;
+}
+
+/*图片*/
+#rangeShow{
+    border: 2px solid black;
+    float: left;
+    width:150px;
+    height: 100px;
+    margin-right: 20px;
+}
+
+/* 模拟placeholder 文字颜色设置成灰色*/
+.fontGray{
+    color:gray;
+}

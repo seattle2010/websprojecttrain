@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Html5Day0303</title>
+    <style>
+        .album {
+            border: 3px dashed #ccc;
+            float: left;
+            margin: 10px;
+            min-height: 100px;
+            padding: 10px;
+            width: 220px;
+        }
+        img{
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h2>温馨提示：可将照片直接拖到垃圾箱中</h2>
+    </div>
+    <div id="album" class="album">
+        <h2>相册</h2>
+        <img draggable="true" id="img1" src="picture1.jpg"/>
+        <img draggable="true" id="img2" src="picture2.jpg"/>
+        <img draggable="true" id="img3" src="picture3.jpg"/>
+    </div>
+    <div id="trash" class="album">
+        <h2>垃圾箱</h2>
+    </div>
+<br/>
+
+    <script type="text/javascript" src="Html5Day0303.js"></script>
+</body>
+</html>

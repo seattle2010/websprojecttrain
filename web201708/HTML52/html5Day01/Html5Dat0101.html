@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="Html5Dat0101.css" type="text/css">
+
+</head>
+<body onload="initbody()">
+
+<form action="">
+    <!--input:邮件类型-->
+    <fieldset>
+        <legend>input:邮件类型</legend>
+        <label for="emailTest1">请输入邮件</label>
+        <input type="email" id="emailTest1" placeholder="请输入邮件" title="邮件">
+    </fieldset>
+
+    <!--input:number类型-->
+    <br>
+    <fieldset>
+        <legend>input:number类型</legend>
+        <label>请输入数字</label>
+        <input type="number" id="numTest1" min="0" max="20" step="2" value="0">
+    </fieldset>
+
+    <!--input:range类型-->
+    <br>
+    <fieldset>
+        <legend>input:range类型</legend>
+        <input type="range" id="rangeTest1" min="0" max="20"
+               step="2" value="10" onchange="rangeChange()">
+        <input type="text" id="rangeTest1Value">
+    </fieldset>
+
+    <!--input:range练习1：通过滑动条改变图片的透明度-->
+    <br>
+    <fieldset>
+        <legend>range练习1：通过滑动条改变图片的透明度</legend>
+        <input type="range" id="rangeTest2" min="0" max="1"
+               step="0.1" value="1" onchange="rangeChange2()">
+        <span id="bg"></span>
+    </fieldset>
+
+    <!--input:range练习2：通过滑动条改变图片的透明度-->
+    <br>
+    <fieldset>
+        <legend>range练习2：通过滑动条模拟RGB颜色</legend>
+
+        <span id="ranColor">
+            <label>红色</label>
+            <input type="range" min="0" max="255" step="1"
+                   value="0" id="RanR" onchange="rangeColor()">
+            <label>绿色</label>
+            <input type="range" min="0" max="255" step="1"
+                   value="0" id="RanG" onchange="rangeColor()">
+            <label>蓝色</label>
+            <input type="range" min="0" max="255" step="1"
+                   value="0" id="RanB" onchange="rangeColor()">
+        </span>
+        <span id="rangeShow"></span>
+        <span id="rangeFont">rgb(0,0,0)</span>
+    </fieldset>
+
+    <br>
+    <fieldset>
+        <legend>input类型：Date和日期类型</legend>
+        <!--日期设置初期值：必须要是 yyyy-MM-dd(例：2017-04-23)的形式 -->
+        <input type="date" id="dateTest1" value="2017-04-23"><br>
+        <input type="month" id="monthTest1"><br>
+        <input type="week" id="weekTest1"><br>
+        <input type="datetime" id="datetimeTest1"><br> <!-- 没有效果，类似于文本框-->
+        <input type="datetime-local" id="datetime-localTest1">
+    </fieldset>
+
+    <br>
+    <fieldset>
+        <legend>input类型：search类型</legend>
+        <input type="search" id="searchTest1">
+    </fieldset>
+
+    <br>
+    <fieldset>
+        <legend>input类型：url类型</legend>
+        <input type="url" id="urlTest1">
+    </fieldset>
+
+    <br>
+    <fieldset>
+        <legend>input类型：color类型</legend>
+        <input type="color" id="colorTest1">
+        <div id="colorDiv">选择color,背景色会改变</div>
+    </fieldset>
+
+    <br>
+    <input type="submit" value="提交">
+</form>
+
+<!--预格式化的文本 pre标签-->
+<pre>
+    表单2：HTML5 的新的表单属性
+        placeholder：属性提供一种提示（hint），描述输入域所期待的值
+             注意：适用类型：text, search, url, telephone, email 以及 password
+        autofocus：属性规定在页面加载时，域自动地获得焦点
+             注意：属性适用于所有 &lt;input&gt;标签的类型
+        pattern (regexp)：属性规定用于验证 input 域的模式
+             注意：适用类型是 text, search, url, telephone, email 以及 password
+        required：属性规定必须在提交之前填写输入域（不能为空）。
+        multiple:属性规定输入域中可选择多个值
+            注意：适用类型是 email和file
+
+</pre>
+
+<form action="Html5Dat0101.html" method="get" id="myForm2">
+    <fieldset>
+        <input type="text" id="id" onfocus="delTip()" name="id" onblur="getTip()" required><br>
+        <!--<input type="text" id="id" oninput="idChange()" required><br>-->
+        <input type="text" id="username" placeholder="请输入用户名"
+               autofocus="autofocus" pattern="^([a-zA-Z]\w{5,9})$" required="required"><br>
+        <input type="email" id="userEmail" placeholder="请输入邮件" multiple><br>
+
+    </fieldset>
+
+    <br>
+    <fieldset>
+        <legend>list属性和datalist标签</legend>
+        Webpage: <input type="url" list="url_list" name="link" />
+        <datalist id="url_list">
+            <option label="W3School" value="http://www.W3School.com.cn" />
+            <option label="Google" value="http://www.google.com" />
+            <option label="Microsoft" value="http://www.microsoft.com" />
+        </datalist>
+    </fieldset>
+
+    <br>
+    <fieldset>
+        <legend>list属性和datalist标签运用 籍贯</legend>
+        籍贯: <input type="text" list="jiguan_list"/>
+        <datalist id="jiguan_list">
+            <option value="云南">云南021</option>
+            <option value="辽宁">辽宁023</option>
+            <option value="吉林" label="吉林032"></option>
+            <option value="黑龙江" label="黑龙江041"/>
+        </datalist>
+    </fieldset>
+
+    <input type="submit" value="提交">
+</form>
+
+<pre>
+    &lt;progress&gt; 标签:进度条
+    &lt;meter&gt; 标签定义度量衡
+</pre>
+
+    <progress max="100" value="50"></progress>
+<br>
+    <meter min="0" max="100" low="40" high="80"
+           optimum="60" value="40"></meter>
+<!--meter的属性
+   high属性：高的值
+   low属性：低的值
+   min属性：最小值
+   max属性：最大值
+   optimum属性：最佳的值
+          如果该值高于 "high" 属性，则意味着值越高越好
+          如果该值低于 "low" 属性的值，则意味着值越低越好。
+   value属性：当前度量的值
+   注意：(1)optimum值在low和high之间，value在low和high之间颜色是绿色，
+            value小于low或大于high颜色是黄色。
+         (2)optimum值小于low，value越低越好。value大于high值颜色是红色。
+         (3)optimum值大于，value越high高越好。value小于low值颜色是红色。
+-->
+
+<!--form 属性:规定输入域所属的一个或多个表单
+    autocomplete属性：规定 form 或 input 域应该拥有自动完成功能
+-->
+
+<form action="" id="myForm3" autocomplete="on">
+    <input type="text" id="name3" name="name33" placeholder="请输入名字3" autocomplete="on"><br>
+    <input type="email" id="email3" name="email33" placeholder="请输入邮件3" autocomplete="on"><br>
+    <input type="submit" value="提交3">
+</form>
+
+<label for="name4">form3外的输入：</label>
+<input type="text" id="name4" name="name44" form="myForm3"/>
+
+<br>
+<hr>
+    <form id="myFrom4" oninput="num.value=parseInt(num1.value)+parseInt(num2.value)">
+    <input type="range" min="0" max="100"
+           step="2" value="0" name="num1">
+    +
+        <input type="text" name="num2" value="20">
+    =<output name="num" for="num1 num2"></output>
+</form>
+
+
+<form>
+    <input type="checkbox" >
+
+</form>
+
+
+
+<br>
+<br>
+<br>
+<br>
+<script type="text/javascript" src="Html5Dat0101.js"></script>
+</body>
+</html>
