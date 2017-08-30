@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<form action="https://www.baidu.com" method="get" id="register" target="_blank" autocomplete="on"  oninput="res.value = num1.valueAsNumber+num2.valueAsNumber">
+    <!--fieldset是分组-->
+<fieldset name="group1">
+    <legend>注册分组</legend>
+    <label for="user">用户名：</label>  <!-- user是id值  点击“用户名”可以激活输入框-->
+         <input type="text" id="user" autocomplete="on" required>
+</fieldset>
+
+    <fieldset name="group2">
+        <legend>datalist</legend>
+        <input type="text" list="abc">
+    </fieldset>
+    <datalist id="abc">
+        <option value="我想吃苹果">苹果</option>
+        <option value="我想吃草莓">草莓</option>
+        <option value="我想吃西瓜">西瓜</option>
+    </datalist>
+
+    <input type="number" name="" id="1" max="100" min="10" step="10">
+    <input type="range" name="" id="2" max="100" min="10" step="10">
+    <br>
+<!--具体算是输入在最上面form里面写-->
+    <input type="number" id="num1"> + <input type="number" name="num2" id="num2"> =
+    <output for="num1 num2" name="res"></output>
+    <br>
+
+    <input type="date" name="" id="">
+    <input type="month" name="" id="">
+    <input type="time" name="" id="">
+    <input type="week" name="" id="">
+    <input type="datetime" name="" id="">
+
+    <input type="color" name="" id="">
+
+    <input type="image" src="123.png" alt="图片替代提交按钮">
+
+    <select name="" id="" form="abc" size="6" multiple="multiple">
+        <optgroup id="flu" label="水果">
+            <option value="1">苹果</option>
+        </optgroup>
+        <optgroup label="粮食">
+            <option value="2" selected>粗粮</option>
+        </optgroup>
+    </select>
+
+    <textarea name="" id="" cols="30" rows="10" placeholder="请留下建议"></textarea>
+
+    <input type="text" placeholder="请输入区号+电话号" pattern="[\d]{2,4}\-[\d]{6,8}$">
+</form>
+<!--<fieldset form="register">-->
+    <!--<input type="email" name="email" id="email">-->
+    <!--</label>-->
+<!--</fieldset>-->
+<form action="#" novalidate>禁用表单验证</form>
+
+
+<button type="button">普通按钮</button>
+<button type="reset">reset按钮</button>
+<button type="submit" form="register" formaction="https://www.sougou.com">提交按钮 覆盖form表单的action</button>
+</body>
+</html>

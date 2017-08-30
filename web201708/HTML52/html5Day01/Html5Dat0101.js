@@ -1,4 +1,6 @@
 
+
+
 //range例子1：文本框显示滑动条的数值
 function rangeChange(){
     $$('rangeTest1Value').value=$$('rangeTest1').value;

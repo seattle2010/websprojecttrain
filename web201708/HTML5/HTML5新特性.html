@@ -23,5 +23,18 @@ webRTC  tcp/ip网络编程平台
 canvas  UI
 svg  地图开发 动画 图标
 video
+
+header与footer标签用于表示页面或者应用的头部和尾部。nav用于表示导航。
+可以使用section和article标签替代过度使用div，用这些标签来对页面进行内容划分，例如article标签表示文章。aside标签和article标签的用法类似，只是表示内容会出现在侧边栏。
+figure标签表示一段自包含的内容——独立的流内容（图像、图表、照片、代码等等）。figure 元素的内容与主内容相关，但如果被删除，则不应对文档流产生影响。
+<!--插入一个图片-->
+<figsure>
+    <figcaption>这是一张图片</figcaption>
+    <img src="img.png" alt="图片">
+</figsure>
+
+<progress value="30" max = "100">百分之30进度条</progress>
+
+<meter value="30" min="10" max="100" low="40" high="80" optimum="60">超过40 80提示 最佳值60</meter>
 </body>
 </html>
