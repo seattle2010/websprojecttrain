@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>简单的留言板</title>
+    <script src="03留言板.js"></script>
+</head>
+<body>
+<h1>简单的留言板</h1>
+<textarea name="dome" id="dome" cols="60" rows="10"></textarea>
+<input type="button" value="保存" onclick="save('dome')">
+<input type="button" value="清空" onclick="clear('msg')">
+
+<input type="button" value="读取" onclick="read('msg')"> <br>
+<hr>
+<p id="msg"></p>
+</body>
+</html>

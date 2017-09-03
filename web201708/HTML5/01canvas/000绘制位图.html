@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function init() {
+            var can = document.getElementById("canvas1");
+            var context = can.getContext("2d");
+
+            var img = new Image;
+            img.src = "ym.jpg";
+            img.onload = function () {
+                //原图大小
+                context.drawImage(img, 20, 20);
+                //缩放
+                context.drawImage(img, 300, 0, 80, 120);
+                //截取  1，2是从哪里截取  3,4是截取宽高  5，6是放在画布坐标 7，8缩放大小一共8个参数
+                context.drawImage(img, 60, 60, 80, 120);
+
+            }
+        }
+    </script>
+</head>
+<body onload="init()">
+<canvas id="canvas1" width="800" height="500" style="background-color: antiquewhite"></canvas>
+</body>
+</html>

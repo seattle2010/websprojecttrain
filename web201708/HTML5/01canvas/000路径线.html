@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function init() {
+            var can1 = document.getElementById("canvas1");
+            var context = can1.getContext("2d");
+            //开始绘制路径
+            context.beginPath();
+            //不带线的移动起始点的坐标
+            context.moveTo(50, 50);
+            context.lineTo(200, 200);
+
+            //单独再画一个矩形  在路径里是 rect
+            context.rect(100, 200, 100, 45);
+            //单独画一个圆形   六个参数
+            context.arc(100, 200, 100, 0, 1.5 * Math.PI, true);
+
+            context.arc(00, 200, 100, 0, 1.5 * Math.PI, false);
+            context.fillStyle = "pink";
+            context.fill();
+            context.closePath();
+
+            context.strokeStyle = "pink";
+            context.lineWidth = 3;
+            //单纯的线填充
+            context.stroke();
+
+
+
+        }
+    </script>
+</head>
+<body onload="init()">
+<canvas id="canvas1" width="400" height="300" style="background-color: antiquewhite"></canvas>
+
+</body>
+</html>

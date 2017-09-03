@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function init() {
+           var canvasEL = document.getElementById("canvas1");
+           var context = canvasEL.getContext("2d");
+
+            context.fillStyle = "pink";
+            context.fillRect(50,50,100,80);
+
+            context.strokeStyle = "hotpink";
+            context.lineWidth = 3;
+            context.lineJoin = "round";
+            context.strokeRect(100,100,100,80)
+
+            //加上阴影效果
+            context.shadowBlur = 5;
+            context.shadowColor = "black";
+            context.shadowOffsetX = 5;
+
+            context.strokeStyle = "pink";
+            context.lineWidth = 3;
+            context.lineJoin = "round";
+            context.strokeRect(150,150,100,80)
+        }
+    </script>
+</head>
+<body onload="init()">
+<canvas id="canvas1" width="400" height="300" style="background-color: antiquewhite"></canvas>
+
+</body>
+</html>

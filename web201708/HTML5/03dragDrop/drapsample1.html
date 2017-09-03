@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>03html05-拖拽</title>
+    <link rel="stylesheet" href="bootstrap.min.css"/>
+    <style>
+        #target {
+            padding: 20px;
+            height: 300px;
+            border: 5px dashed;
+            color:  #e0e0e0;
+            font-size: 40px;
+            line-height: 260px;
+            text-align: center;
+            -webkit-user-select:none;
+            cursor: pointer;
+        }
+        #target.actived {
+            border-color: #888;
+            color: #fafafa;
+            box-shadow: 0 0 80px #e0e0e0 inset;;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div>
+        <h1>Drag&Drop</h1>
+    </div>
+    <div>
+        <p>菜鸟在线专注游戏开发教育，只为成就最好的你</p>
+        <img src="1.jpg" alt=""/>
+    </div>
+    <ul id="result"></ul>
+    <div id="target">
+        Drag something into here
+    </div>
+</div>
+<script>
+    (function () {
+        //找到目标位置框框
+        var target = document.querySelector("#target");
+        var fileList = document.querySelector("#result");
+        //注册拖拽进入
+        target.addEventListener('dragenter', function () {
+            this.classList.add('actived');
+        });
+        //拖拽离开
+        target.addEventListener('dragleave', function () {
+            this.classList.remove('actived');
+        });
+        //如果想捕获drop事件就得在该事件中阻止系统默认事件
+        target.addEventListener('dragover', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+        //当元素放到该对象上 会触发drop事件
+        target.addEventListener('drop', function (e) {
+            //拖入的文件
+            if(e.dataTransfer.files.length){
+                var files = e.dataTransfer.files;
+                for(var i = 0;i<files.length; i++){
+                    var li = document.createElement('li');
+                    li.setAttribute('class','list-group-item');
+                    //创建信息的子节点
+                    li.innerHTML = '<h5>'
+                        + files[i].name +
+                        '</h5><p>'
+                        + files[i].lastModifiedDate.toLocaleDateString()
+                        + ' ' + files[i].lastModifiedDate.toLocaleTimeString()
+                        + '' +  (files[i].size / 1024).toFixed(2) + 'KB</p>';
+                    fileList.appendChild(li);
+                }
+            }else{
+                // var data = e.dataTransfer.getData("text/plain") ||  e.dataTransfer.getData("text/uri-list");
+                var data = e.dataTransfer.getData("text/plain");
+                if(data){
+                    //拖入的是文本
+                    this.innerHTML = e.dataTransfer.getData("text/plain");
+                }else {
+                    var img = document.createElement("img");
+                    img.src = e.dataTransfer.getData("text/uri-list");
+                    target.appendChild(img);
+                }
+            }
+            this.classList.remove('actived');
+            e.preventDefault();
+        });
+    })();
+</script>
+</body>
+</html>

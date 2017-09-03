@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box {
+            width: 450px;
+            height: 100px;
+            padding: 10px;
+            border: 1px dotted red;
+        }
+    </style>
+</head>
+<body>
+<p>Html5 拖拽</p>
+<div id="box" ondrop="handleDrop(event)" ondragover="allowDrop(event)"></div>
+<br>
+<img id="img1" src="ym.jpg" draggable="true" ondragstart="handleDragStart(event)"  width="150" height="100">
+<img id="img2" src="ym.jpg" draggable="true" ondragstart="handleDragStart(event)"  width="150" height="100">
+<img id="Img3" src="ym.jpg" draggable="true" ondragstart="handleDragStart(event)"  width="150" height="100">
+
+<script>
+    function handleDragStart(e) {
+        e.dataTransfer.setData("Text", e.target.id);
+    }
+
+    function allowDrop(e) {
+        e.preventDefault();
+    }
+
+    function handleDrop(e) {
+        e.preventDefault();
+        var src = e.dataTransfer.getData("Text");
+        e.target.appendChild(document.getElementById(src));
+    }
+
+</script>
+</body>
+</html>
