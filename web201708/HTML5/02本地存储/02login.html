@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+用户名： <input type="text" id="username"> <br>
+密码：<input type="text" id="password"> <br>
+是否永久保存： <input type="checkbox" id="save">
+</body>
+<script>
+    var usernameEL = document.getElementById("username");
+    var passwordEL = document.getElementById("password");
+    var saveEL = document.getElementById("save");
+
+    if(localStorage.getItem("username")&&localStorage.getItem("password")){
+        usernameEL.value = localStorage.getItem("username");
+        passwordEL.value = localStorage.getItem("password");
+        saveEL.checked = true;
+    }
+
+    saveEL.onclick = function () {
+//        alert("hi");
+//        alert(save.checked);
+        if(save.checked){
+            localStorage.setItem("username", usernameEL.value);
+            localStorage.setItem("password", passwordEL.value);
+        }else {
+            localStorage.removeItem("username");
+            localStorage.removeItem("password");
+        }
+    }
+</script>
+</html>

@@ -1,0 +1,8 @@
+CACHE MANIFEST
+CACHE:
+offline.html
+offline.js
+NETWORK:
+offline.css
+ym.jpg
+##AddType text/cache-manifest.manifest

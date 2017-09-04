@@ -20,3 +20,9 @@ function read(id) {
     var target = document.getElementById(id);
     target.innerHTML = str;
 }
+function clearall() {
+    localStorage.clear();
+    alert("数据已经被清空");
+    read('msg');
+
+}
